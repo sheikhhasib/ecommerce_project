@@ -33,17 +33,19 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('home') }}">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('add/product/view') }}">Add Product</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('home') }}">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('add/product/view') }}">Add Product</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('add/category/view') }}">Add Category</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('add/category/view') }}">Add Category</a>
+                            </li>
+                        @endauth
+                       
                     </ul>
 
                     <!-- Right Side Of Navbar -->

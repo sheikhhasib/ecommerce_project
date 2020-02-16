@@ -20,20 +20,23 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                            <th>Sl. No.</th>
-                            <th>Product name</th>
-                            <th>Product Description</th>
-                            <th>Product price</th>
-                            <th>Product Quantity</th>
-                            <th>Alert Quantity</th>
-                            <th>Product Image</th>
-                            <th>Action</th>
+                            <th scope="col">Sl. No.</th>
+                            <th scope="col">Category id</th>
+                            <th scope="col">Product name</th>
+                            <th scope="col">Product Description</th>
+                            <th scope="col">Product price</th>
+                            <th scope="col">Product Quantity</th>
+                            <th scope="col">Alert Quantity</th>
+                            <th scope="col">Product Image</th>
+                            <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($products as $product)
                                 <tr>
                                     <td>{{$loop->index +1}}</td>
+                                    {{-- <td>{{App\Category::find($product->category_id)->category_name}}</td> --}}
+                                    <td>{{ $product->relationtocategory->category_name}}</td>
                                     <td>{{ $product->product_name}}</td>
                                     <td>{{str_limit($product->product_description )}}</td>
                                     <td>{{ $product->product_price}}</td>
@@ -43,7 +46,7 @@
                                     <img src="{{ asset('uploads/product_photos')}}/{{ $product->product_image }}" alt="not found" width="50">
                                     </td>
                                     <td>
-                                    <div class="btn-group" role="group">
+                                    <div class="btn-group hidden-xs" role="group">
                                         <a href="{{ url('delete/product') }}/ {{$product->id}}" class="btn btn-sm btn-danger">Delete</a>
                                         <a href="{{ url('edit/product') }}/ {{$product->id}}" class="btn btn-sm btn-warning">Edit</a>
                                     </div>
@@ -91,9 +94,22 @@
                     @csrf
 
                         <div class="form-group">
+                            <label>Categorie name</label>
+                            <select class="form-control" name="category_id" id="">
+                                <option value="">Select One</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->category_name}}</option>
+                                @endforeach
+                                
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Product name</label>
                             <input type="text" class="form-control" placeholder="Enter Product name" name="product_name" value="{{ old('product_name') }}">
                         </div>
+
+                        
 
                         <div class="form-group">
                             <label>Product Description</label>

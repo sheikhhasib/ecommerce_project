@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
 use App\Product;
 use Image;
@@ -14,7 +15,8 @@ class ProductController extends Controller
 
         $products = Product::simplePaginate(6);
         $deletedproducts = Product::onlyTrashed()->get();
-        return view('product/view',compact('products','deletedproducts'));
+        $categories = Category::all();
+        return view('product/view',compact('products','deletedproducts','categories'));
      }
      
 // insert product 
@@ -24,6 +26,7 @@ class ProductController extends Controller
          
 
         $request->validate([
+         'category_id'=> 'required',
          'product_name' => 'required',
          'product_description' => 'required',
          'product_price' => 'required|numeric',
@@ -31,7 +34,8 @@ class ProductController extends Controller
          'alert_quantity' => 'required|numeric',
         ]);
         $last_inserted_id = Product::insertGetId([
-            'product_name' => $request->product_name,
+            'product_name' => $request->product_name,    
+            'category_id' => $request->category_id,
             'product_description' => $request->product_description,
             'product_price' => $request->product_price,
             'product_quantity' => $request->product_quantity,

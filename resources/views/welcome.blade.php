@@ -94,15 +94,18 @@
 <section class="product-section spad">
 	<div class="container">
 		<ul class="product-filter controls">
-			<li class="control" data-filter=".new">New arrivals</li>
-			<li class="control" data-filter="all">Recommended</li>
-			<li class="control" data-filter=".best">Best sellers</li>
-			<li class="control" data-filter=".hasib">hasib</li>
+			<li class="control" data-filter=".all">All</li>
+
+			@foreach ($categories as $category)
+				<li class="control" data-filter=".filter{{$category->id}}">{{$category->category_name}}</li>
+			@endforeach
+			
+			
 		</ul>
 		<div class="row" id="product-filter">
 			
 			@foreach ($products as $product)
-			<div class="mix col-lg-3 col-md-6 best">
+			<div class="mix col-lg-3 col-md-6 all filter{{$product->category_id}}">
 				<div class="product-item">
 					<a href="{{url('product/details')}}/{{$product->id}}">
 						<figure>
