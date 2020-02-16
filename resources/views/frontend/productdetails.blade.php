@@ -64,6 +64,8 @@
 				<div class="col-lg-6">
 					<div class="product-content">
 						<h2>{{ $single_product_info->product_name}}</h2>
+						<h6>Category Name : {{$single_product_info->relationtocategory->category_name}}</h6>
+						<br>
 						<div class="pc-meta">
 							<h4 class="price">৳ {{ $single_product_info->product_price}}</h4>
 							<div class="review">
@@ -150,7 +152,7 @@
 			</div>
 			<div class="row">
 
-			@foreach ($releted_products as $releted_product)
+			@forelse ($releted_products as $releted_product)
 			<div class="col-lg-3">
 				<div class="product-item">
 					<a href="{{url('product/details')}}/{{$releted_product->id}}">
@@ -175,7 +177,9 @@
 					</div>
 				</div>
 			</div>
-			@endforeach
+			@empty
+				<h4 class="pb-5">No Releted Products</h4>
+			@endforelse
 
 			</div>
 		</div>

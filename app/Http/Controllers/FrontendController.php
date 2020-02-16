@@ -28,8 +28,8 @@ class FrontendController extends Controller
     function productdetails($product_id)
      {
         
-        $single_product_info = Product::find($product_id);
-        $releted_products = Product::where('id','!=',$product_id)->get();
+        $single_product_info = Product::find($product_id); 
+        $releted_products = Product::where('id','!=',$product_id)->where('category_id',$single_product_info->category_id) ->get();
         return view('frontend/productdetails',compact('single_product_info','releted_products'));
          
      }

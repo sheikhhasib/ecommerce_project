@@ -1,71 +1,70 @@
-@extends('layouts.frontendapp');
+@extends('layouts.frontendapp')
 @section('frontend_content')
 
-<!-- Hero section -->
-<section class="hero-section set-bg" data-setbg="{{asset('frontend_assets/img/bg.jpg')}}">
-	<div class="hero-slider owl-carousel">
-		<div class="hs-item">
-			<div class="hs-left"><img src="{{asset('frontend_assets/img/slider-img.png')}}" alt=""></div>
-			<div class="hs-right">
-				<div class="hs-content">
-					<div class="price">from $19.90</div>
-					<h2><span>2018</span> <br>summer collection</h2>
-					<a href="" class="site-btn">Shop NOW!</a>
-				</div>	
-			</div>
-		</div>
-		<div class="hs-item">
-			<div class="hs-left"><img src="{{asset('frontend_assets/img/slider-img.png')}}" alt=""></div>
-			<div class="hs-right">
-				<div class="hs-content">
-					<div class="price">from $19.90</div>
-					<h2><span>2018</span> <br>summer collection</h2>
-					<a href="" class="site-btn">Shop NOW!</a>
-				</div>	
-			</div>
-		</div>
-	</div>
-</section>
-<!-- Hero section end -->
+   <!-- Hero section -->
+    <section class="hero-section set-bg" data-setbg="{{ asset('frontend_assets/img/bg.jpg') }}">
+        <div class="hero-slider owl-carousel">
+            <div class="hs-item">
+                <div class="hs-left"><img src="{{ asset('frontend_assets/img/slider-img.png') }}" alt=""></div>
+                <div class="hs-right">
+                    <div class="hs-content">
+                        <div class="price">from $19.90</div>
+                        <h2><span>2018</span> <br>summer collection</h2>
+                        <a href="" class="site-btn">Shop NOW!</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hs-item">
+                <div class="hs-left"><img src="img/slider-img.png" alt=""></div>
+                <div class="hs-right">
+                    <div class="hs-content">
+                        <div class="price">from $19.90</div>
+                        <h2><span>2018</span> <br>summer collection</h2>
+                        <a href="" class="site-btn">Shop NOW!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero section end -->
 
 
-<!-- Intro section -->
-<section class="intro-section spad pb-0">
-	<div class="section-title">
-		<h2>pemium products</h2>
-		<p>We recommend</p>
-	</div>
-	<div class="intro-slider">
-		<ul class="slidee">
-			@foreach ($products as $product)
-				<li>
-					<div class="intro-item">
-						<a href="{{url('product/details')}}/{{$product->id}}">
-							<figure>
-								<img src="{{ asset('uploads/product_photos')}}/{{ $product->product_image }}" alt="#" width="82%">
-							</figure>
-						</a>
-						
-						<div class="product-info">
-							<h5>{{$product->product_name}}</h5>
-							<p>${{$product->product_price}}</p>
-							<a href="{{url('product/details')}}/{{$product->id}}" class="site-btn btn-line">ADD TO CART</a>
-						</div>
-					</div>
-				</li>
-			@endforeach
-			
-		</ul>
-	</div>
-	<div class="container">
-		<div class="scrollbar">
-			<div class="handle">
-				<div class="mousearea"></div>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- Intro section end -->
+    <!-- Intro section -->
+    <section class="intro-section spad pb-0">
+        <div class="section-title">
+            <h2>pemium products</h2>
+            <p>We recommend</p>
+        </div>
+        <div class="intro-slider">
+            <ul class="slidee">
+
+                @foreach($products as $product)
+                    <li>
+                        <div class="intro-item">
+                            <a href="{{ url('product/details') }}/{{ $product->id }}"><figure>
+                                    <img src="{{ asset('/uploads/product_photos') }}/{{$product->product_image}}" alt="#">
+                                </figure></a>
+
+                            <div class="product-info">
+                                <h5>{{ $product->product_name }}</h5>
+                                <p>${{ $product->product_price }} </p>
+                                <a href="{{ url('$product/details') }}/{{ $product->id }}" class="site-btn btn-line">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
+
+            </ul>
+        </div>
+        <div class="container">
+            <div class="scrollbar">
+                <div class="handle">
+                    <div class="mousearea"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Intro section end -->
 
 
 <!-- Featured section -->

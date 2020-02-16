@@ -48,11 +48,15 @@
 			</div>
 			<!-- site menu -->
 			<ul class="main-menu">
+				@php
+					$menus = App\Category::all();
+
+				@endphp
 				<li><a href="index.html">Home</a></li>
-				<li><a href="#">Woman</a></li>
-				<li><a href="#">Man</a></li>
-				<li><a href="#">Woman</a></li>
-				<li><a href="#">Child	</a></li>
+
+				@foreach ($menus as $menu)
+					<li><a href="contact.html">{{$menu->category_name}}</a></li>
+				@endforeach
 				<li><a href="contact.html">Contact</a></li>
 			</ul>
 		</div>
