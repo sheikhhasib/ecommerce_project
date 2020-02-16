@@ -18,6 +18,7 @@
                             <tr>
                             <th>Sl. No.</th>
                             <th>Category name</th>
+                            <th>Menu Status</th>
                             <th>Created at</th>
                             </tr>
                         </thead>
@@ -26,9 +27,11 @@
                                 <tr>
                                     <td>{{$loop->index +1}}</td>
                                     <td>{{ $categorie->category_name}}</td>
+                                    <td>{{ $categorie->category_name}}</td>
+
                                     <td>
                                         {{$categorie->created_at->format('d-M-Y g:i A')}}
-                                        <br>
+                                        <br>    
                                         {{$categorie->created_at->diffForHumans()}}
                                     </td>
                                     
@@ -77,6 +80,10 @@
                         <div class="form-group">
                             <label>Category name</label>
                             <input type="text" class="form-control" placeholder="Enter Category name" name="category_name" value="{{ old('category_name') }}">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="checkbox" name="menu_status" value="1" id="menu"><label for="menu">Use as Menu</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Add Category</button>
                     </form>

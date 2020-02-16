@@ -48,7 +48,7 @@
                             <div class="product-info">
                                 <h5>{{ $product->product_name }}</h5>
                                 <p>${{ $product->product_price }} </p>
-                                <a href="{{ url('$product/details') }}/{{ $product->id }}" class="site-btn btn-line">ADD TO CART</a>
+                                <a href="{{ url('product/details') }}/{{ $product->id }}" class="site-btn btn-line">ADD TO CART</a>
                             </div>
                         </div>
                     </li>

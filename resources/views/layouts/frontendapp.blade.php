@@ -49,7 +49,7 @@
 			<!-- site menu -->
 			<ul class="main-menu">
 				@php
-					$menus = App\Category::all();
+					$menus = App\Category::where('menu_status',1)->get();
 
 				@endphp
 				<li><a href="index.html">Home</a></li>
