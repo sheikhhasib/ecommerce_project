@@ -29,6 +29,12 @@ Route::get('/edit/product/{product_id}','ProductController@editproduct');
 Route::post('edit/product/insert','ProductController@editproductinsert');
 Route::get('/restore/product/{product_id}','ProductController@restoreproduct');
 Route::get('/force/delete/product/{product_id}','ProductController@forcedeleteproduct');
+Route::get('/add/category/view','CategoryController@addcategoryview');
+Route::post('/add/category/insert','CategoryController@addcategoryinsert');
+
+
+
+
 
 
 //frontend controller

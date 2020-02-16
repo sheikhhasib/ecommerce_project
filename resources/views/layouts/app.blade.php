@@ -40,6 +40,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('add/product/view') }}">Add Product</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('add/category/view') }}">Add Category</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

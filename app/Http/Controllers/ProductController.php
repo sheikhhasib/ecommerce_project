@@ -69,6 +69,38 @@ class ProductController extends Controller
 
      function editproductinsert(Request $request)
      {
+         if($request->hasFile('product_image'))
+         {
+            if(Product::find($request->product_id)->product_image=='defaultproductphoto.jpg'){
+
+               //photo upload code start
+               $photo_to_upload = $request->product_image;
+               $filename = $request->product_id.".".$photo_to_upload->getClientOriginalExtension();
+               Image::make($photo_to_upload)->resize(400,450)->save(base_path('public/uploads/product_photos/'.$filename));
+               Product::find($request->product_id)->update([
+                  'product_image' => $filename,
+               ]);
+
+               //photo upload code finish 
+            }else{
+               // delete old photo
+               $delete_this_file = Product::find($request->product_id)->product_image;
+               unlink(base_path('public/uploads/product_photos/'.$delete_this_file));
+               //delete photo finish
+
+               //photo upload start
+               $photo_to_upload = $request->product_image;
+               $filename = $request->product_id.".".$photo_to_upload->getClientOriginalExtension();
+               Image::make($photo_to_upload)->resize(400,450)->save(base_path('public/uploads/product_photos/'.$filename));
+               Product::find($request->product_id)->update([
+                  'product_image' => $filename,
+               ]);
+               //photo upload finish
+
+            }
+         }   
+         
+      
          Product::find($request->product_id)->update([
             'product_name' => $request->product_name,
             'product_description' => $request->product_description,
@@ -87,6 +119,9 @@ class ProductController extends Controller
 
      function forcedeleteproduct($product_id)
      {
+      $delete_this_file = Product::onlyTrashed()->find($product_id)->product_image;
+      unlink(base_path('public/uploads/product_photos/'.$delete_this_file));
+      
       Product::onlyTrashed()->find($product_id)->forceDelete();
       return back();
      }
