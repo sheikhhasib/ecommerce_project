@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
 
-        
+
 
         <div class="col-8">
             <div class="card">
@@ -12,7 +12,7 @@
                     Product List
                 </div>
                 <div class="card-body">
-                     
+
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -27,21 +27,21 @@
                                 <tr>
                                     <td>{{$loop->index +1}}</td>
                                     <td>{{ $categorie->category_name}}</td>
-                                    <td>{{ $categorie->category_name}}</td>
+                                    <td>{{ ($categorie->menu_status == 1 ) ? "Yes":"No"}}</td>
 
                                     <td>
                                         {{$categorie->created_at->format('d-M-Y g:i A')}}
-                                        <br>    
+                                        <br>
                                         {{$categorie->created_at->diffForHumans()}}
                                     </td>
-                                    
+
                                 </tr>
-                            @empty 
+                            @empty
                             <tr class="text-center text-danger">
-                                <td colspan="3">No data Available</td>
+                                <td colspan="4">No data Available</td>
                             </tr>
                             @endforelse
-                            
+
                         </tbody>
                     </table>
                     {{-- {{$products->links()}} --}}
@@ -60,7 +60,7 @@
 
                     @if(session('status'))
                         <div class="alert alert-success">
-                            {{ session('status') }} 
+                            {{ session('status') }}
                         </div>
                     @endif
 
@@ -71,12 +71,12 @@
                             @endforeach
                         </div>
                     @endif
-                    
-                    
+
+
                     <form action="{{ url('add/category/insert')}}"  method="post">
                     @csrf
-                    
-                    
+
+
                         <div class="form-group">
                             <label>Category name</label>
                             <input type="text" class="form-control" placeholder="Enter Category name" name="category_name" value="{{ old('category_name') }}">
@@ -92,10 +92,10 @@
         </div>
 
 
-        
-      
+
+
     </div>
-</div> 
+</div>
 
 
 

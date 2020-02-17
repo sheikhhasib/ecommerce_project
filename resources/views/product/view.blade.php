@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
 
-        
+
 
         <div class="col-9">
             <div class="card">
@@ -14,7 +14,7 @@
                 <div class="card-body">
                     @if(session('deletestatus'))
                         <div class="alert alert-danger">
-                            {{ session('deletestatus') }} 
+                            {{ session('deletestatus') }}
                         </div>
                     @endif
                     <table class="table table-bordered">
@@ -50,15 +50,15 @@
                                         <a href="{{ url('delete/product') }}/ {{$product->id}}" class="btn btn-sm btn-danger">Delete</a>
                                         <a href="{{ url('edit/product') }}/ {{$product->id}}" class="btn btn-sm btn-warning">Edit</a>
                                     </div>
-                                        
+
                                     </td>
                                 </tr>
-                            @empty 
+                            @empty
                             <tr class="text-center text-danger">
-                                <td colspan="7">No data Available</td>
+                                <td colspan="9">No data Available</td>
                             </tr>
                             @endforelse
-                            
+
                         </tbody>
                     </table>
                     {{$products->links()}}
@@ -73,7 +73,7 @@
                 <div class="card-body">
                     @if(session('restore'))
                         <div class="alert alert-danger">
-                            {{ session('restore') }} 
+                            {{ session('restore') }}
                         </div>
                     @endif
                     <table class="table table-bordered">
@@ -104,12 +104,12 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @empty 
+                            @empty
                             <tr class="text-center text-danger">
                                 <td colspan="7">No data Available</td>
                             </tr>
                             @endforelse
-                            
+
                         </tbody>
                     </table>
                     {{$products->links()}}
@@ -130,7 +130,7 @@
 
                     @if(session('status'))
                         <div class="alert alert-success">
-                            {{ session('status') }} 
+                            {{ session('status') }}
                         </div>
                     @endif
 
@@ -141,8 +141,8 @@
                             @endforeach
                         </div>
                     @endif
-                    
-                    
+
+
                     <form action="{{ url('add/product/insert')}}"  method="post" enctype="multipart/form-data">
                     @csrf
 
@@ -153,8 +153,8 @@
                                 @foreach ($categories as $category)
                                     <option value="{{$category->id}}">{{$category->category_name}}</option>
                                 @endforeach
-                                
-                                
+
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -162,7 +162,7 @@
                             <input type="text" class="form-control" placeholder="Enter Product name" name="product_name" value="{{ old('product_name') }}">
                         </div>
 
-                        
+
 
                         <div class="form-group">
                             <label>Product Description</label>
@@ -195,11 +195,11 @@
         </div>
 
 
-        
-        
+
+
 
     </div>
-</div> 
+</div>
 
 
 

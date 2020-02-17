@@ -6,7 +6,7 @@
 	<meta name="description" content="The Plaza eCommerce Template">
 	<meta name="keywords" content="plaza, eCommerce, creative, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Favicon -->   
+	<!-- Favicon -->
 	<link href="img/favicon.ico" rel="shortcut icon"/>
 
 	<!-- Google Fonts -->
@@ -55,7 +55,7 @@
 				<li><a href="index.html">Home</a></li>
 
 				@foreach ($menus as $menu)
-					<li><a href="contact.html">{{$menu->category_name}}</a></li>
+					<li><a href="{{url('category/wise/product')}}/{{$menu->id}}">{{$menu->category_name}}</a></li>
 				@endforeach
 				<li><a href="contact.html">Contact</a></li>
 			</ul>
@@ -63,11 +63,11 @@
 	</header>
 	<!-- Header section end -->
 
-    
+
 
     @yield('frontend_content')
 
-    	<!-- Footer top section -->	
+    	<!-- Footer top section -->
 	<section class="footer-top-section home-footer">
 		<div class="container">
 			<div class="row">
@@ -135,7 +135,7 @@
 			</div>
 		</div>
 	</section>
-	<!-- Footer top section end -->	
+	<!-- Footer top section end -->
 
 		<!-- Footer section -->
 	<footer class="footer-section">

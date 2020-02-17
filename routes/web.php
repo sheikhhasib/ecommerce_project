@@ -37,8 +37,10 @@ Route::post('/add/category/insert','CategoryController@addcategoryinsert');
 
 
 
+
 //frontend controller
 Route::get('contact','FrontendController@contact');
 Route::get('about','FrontendController@about');
 Route::get('/','FrontendController@index');
 Route::get('/product/details/{product_id}','FrontendController@productdetails');
+Route::get('/category/wise/product/{category_id}','FrontendController@categorywiseproduct');
