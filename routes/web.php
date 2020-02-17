@@ -15,7 +15,6 @@
 
 
 
-fdhsahfi
 
 Auth::routes();
 
