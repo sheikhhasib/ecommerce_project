@@ -57,7 +57,7 @@
 				@foreach ($menus as $menu)
 					<li><a href="{{url('category/wise/product')}}/{{$menu->id}}">{{$menu->category_name}}</a></li>
 				@endforeach
-				<li><a href="contact.html">Contact</a></li>
+				<li><a href="{{url('contact')}}">Contact</a></li>
 			</ul>
 		</div>
 	</header>

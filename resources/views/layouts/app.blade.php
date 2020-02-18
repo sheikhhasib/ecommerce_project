@@ -44,8 +44,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('add/category/view') }}">Add Category</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('contact/message/view') }}">View Contact Message</a>
+                            </li>
                         @endauth
-                       
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->

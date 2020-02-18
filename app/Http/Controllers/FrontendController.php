@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessage;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use App\Contact;
+use Mail;
+
 
 
 
@@ -13,6 +17,14 @@ class FrontendController extends Controller
 {
     function contact(){
         return view('contact');
+    }
+    function contactinsert(Request $request)
+    {
+        Contact::insert($request->except('_token'));
+        //sent mail to the company
+        $message = $request->message;
+        Mail::to('hasib2130@gmail.com')->send(new ContactMessage($message));
+        return back()->withstatus('Message sent successfully');
     }
 
     function about(){
@@ -42,4 +54,7 @@ class FrontendController extends Controller
         $products = Product::where('category_id',$category_id)->get();
         return view('frontend/categorywiseproduct',compact('products'));
      }
+
+
+
 }

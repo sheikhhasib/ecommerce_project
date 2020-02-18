@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Contact;
+
+
+
 class HomeController extends Controller
 {
     /**
@@ -24,7 +28,13 @@ class HomeController extends Controller
     public function index()
     {
         $all_users = User::all();
-        
+
         return view('home',compact('all_users'));
+    }
+
+    public  function  contactmessageview()
+    {
+        $contactmessages = Contact::all();
+        return view('contact/view',compact('contactmessages'));
     }
 }

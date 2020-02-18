@@ -30,6 +30,7 @@ Route::get('/restore/product/{product_id}','ProductController@restoreproduct');
 Route::get('/force/delete/product/{product_id}','ProductController@forcedeleteproduct');
 Route::get('/add/category/view','CategoryController@addcategoryview');
 Route::post('/add/category/insert','CategoryController@addcategoryinsert');
+Route::get('/contact/message/view','HomeController@contactmessageview');
 
 
 
@@ -43,3 +44,4 @@ Route::get('about','FrontendController@about');
 Route::get('/','FrontendController@index');
 Route::get('/product/details/{product_id}','FrontendController@productdetails');
 Route::get('/category/wise/product/{category_id}','FrontendController@categorywiseproduct');
+Route::post('/contact/insert','FrontendController@contactinsert');
