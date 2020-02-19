@@ -31,6 +31,7 @@ Route::get('/force/delete/product/{product_id}','ProductController@forcedeletepr
 Route::get('/add/category/view','CategoryController@addcategoryview');
 Route::post('/add/category/insert','CategoryController@addcategoryinsert');
 Route::get('/contact/message/view','HomeController@contactmessageview');
+Route::get('/change/menu/status/{category_id}','HomeController@changemenustatus');
 
 
 
@@ -45,3 +46,7 @@ Route::get('/','FrontendController@index');
 Route::get('/product/details/{product_id}','FrontendController@productdetails');
 Route::get('/category/wise/product/{category_id}','FrontendController@categorywiseproduct');
 Route::post('/contact/insert','FrontendController@contactinsert');
+Route::get('/add/to/cart/{product_id}','FrontendController@addtocart');
+Route::get('/cart','FrontendController@cart');
+Route::get('/delete/form/cart/{cart_id}','FrontendController@deleteformcart');
+Route::get('/clear/cart','FrontendController@clearcart');

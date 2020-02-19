@@ -20,6 +20,7 @@
                             <th>Category name</th>
                             <th>Menu Status</th>
                             <th>Created at</th>
+                            <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,6 +34,9 @@
                                         {{$categorie->created_at->format('d-M-Y g:i A')}}
                                         <br>
                                         {{$categorie->created_at->diffForHumans()}}
+                                    </td>
+                                    <td>
+                                        <a href="{{url('change/menu/status')}}/{{$categorie->id}}" type="submit" class="btn btn-sm btn-info">Change</a>
                                     </td>
 
                                 </tr>

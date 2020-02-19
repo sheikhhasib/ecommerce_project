@@ -1,41 +1,12 @@
 @extends('layouts.frontendapp');
 
 @section('frontend_content')
-
-	<!-- Header section -->
-	<header class="header-section header-normal">
-		<div class="container-fluid">
-			<!-- logo -->
-			<div class="site-logo">
-				<img src="{{asset('frontend_assets/img/logo.png')}}" alt="logo">
-			</div>
-			<!-- responsive -->
-			<div class="nav-switch">
-				<i class="fa fa-bars"></i>
-			</div>
-			<div class="header-right">
-				<a href="cart.html" class="card-bag"><img src="{{asset('frontend_assets/img/icons/bag.png')}}" alt=""><span>2</span></a>
-				<a href="#" class="search"><img src="{{asset('frontend_assets/img/icons/search.png')}}" alt=""></a>
-			</div>
-			<!-- site menu -->
-			<ul class="main-menu">
-				<li><a href="{{ url('/')}}">Home</a></li>
-				<li><a href="#">Woman</a></li>
-				<li><a href="#">Man</a></li>
-				<li><a href="#">LookBook</a></li>
-				<li><a href="#">Blog</a></li>
-				<li><a href="contact.html">Contact</a></li>
-			</ul>
-		</div>
-	</header>
-	<!-- Header section end -->
-
 	<!-- Page Info -->
 	<div class="page-info-section page-info">
 		<div class="container">
 			<div class="site-breadcrumb">
-				<a href="{{ url('/') }}">Home</a> / 
-				
+				<a href="{{ url('/') }}">Home</a> /
+
 				<span>{{ $single_product_info->product_name}}</span>
 			</div>
 			<img src="{{asset('frontend_assets/img/page-info-art.png')}}" alt="" class="page-info-art">
@@ -114,7 +85,7 @@
 								<label for="xxl-size">XXL</label>
 							</div>
 						</div>
-						<a href="#" class="site-btn btn-line">ADD TO CART</a>
+						<a href="{{url('add/to/cart')}}/{{$single_product_info->id}}" class="btn site-btn btn-line">ADD TO CART</a>
 					</div>
 				</div>
 			</div>
@@ -141,7 +112,7 @@
 								<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
 							</div>
 							<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3">
-								
+
 							</div>
 						</div>
 					</div>
@@ -183,7 +154,7 @@
 
 			</div>
 		</div>
-	</div> 
+	</div>
 	<!-- Page end -->
 
 @endsection

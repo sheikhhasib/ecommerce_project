@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Contact;
+use App\Category;
 
 
 
@@ -36,5 +37,30 @@ class HomeController extends Controller
     {
         $contactmessages = Contact::all();
         return view('contact/view',compact('contactmessages'));
+    }
+    public function  changemenustatus($category_id)
+    {
+//first  type it's working
+//        if (Category::find($category_id)->menu_status==0)
+//        {
+//            Category::find($category_id)->update([
+//                'menu_status' => true,
+//            ]);
+//        }else{
+//            Category::find($category_id)->update([
+//                'menu_status' => false,
+//            ]);
+//        }
+
+        //second type it's working
+        $category_info = Category::find($category_id);
+        if ($category_info->menu_status==0 ){
+            $category_info->menu_status = true;
+        }else{
+            $category_info->menu_status = false;
+        }
+        $category_info->save();
+
+        return back();
     }
 }

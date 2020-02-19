@@ -32,7 +32,7 @@
 		<div class="loader"></div>
 	</div> -->
 	<!-- Header section -->
-	<header class="header-section">
+	<header class="header-section header-normal">
 		<div class="container-fluid">
 			<!-- logo -->
 			<div class="site-logo">
@@ -43,7 +43,7 @@
 				<i class="fa fa-bars"></i>
 			</div>
 			<div class="header-right">
-				<a href="cart.html" class="card-bag"><img src="{{asset('frontend_assets/img/icons/bag.png')}}" alt=""><span>2</span></a>
+				<a href="{{url('cart')}}" class="card-bag"><img src="{{asset('frontend_assets/img/icons/bag.png')}}" alt=""><span>{{App\Cart::where('customer_ip',$_SERVER["REMOTE_ADDR"])->count()}}</span></a>
 				<a href="#" class="search"><img src="{{asset('frontend_assets/img/icons/search.png')}}" alt=""></a>
 			</div>
 			<!-- site menu -->
@@ -52,7 +52,7 @@
 					$menus = App\Category::where('menu_status',1)->get();
 
 				@endphp
-				<li><a href="index.html">Home</a></li>
+				<li><a href="{{url('/')}}">Home</a></li>
 
 				@foreach ($menus as $menu)
 					<li><a href="{{url('category/wise/product')}}/{{$menu->id}}">{{$menu->category_name}}</a></li>
