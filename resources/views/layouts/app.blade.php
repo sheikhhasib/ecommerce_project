@@ -9,8 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -46,6 +45,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('contact/message/view') }}">View Contact Message</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('coupon/add/view') }}">Coupon Add</a>
                             </li>
                         @endauth
 
@@ -91,5 +93,8 @@
             @yield('content')
         </main>
     </div>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
 </html>

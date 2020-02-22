@@ -48,5 +48,12 @@ Route::get('/category/wise/product/{category_id}','FrontendController@categorywi
 Route::post('/contact/insert','FrontendController@contactinsert');
 Route::get('/add/to/cart/{product_id}','FrontendController@addtocart');
 Route::get('/cart','FrontendController@cart');
+Route::get('/cart/{coupon_name}','FrontendController@cart');
+
 Route::get('/delete/form/cart/{cart_id}','FrontendController@deleteformcart');
 Route::get('/clear/cart','FrontendController@clearcart');
+
+
+//coupon controller
+Route::get('/coupon/add/view','CouponController@couponaddview');
+Route::post('/coupon/add/insert','CouponController@couponaddinsert');

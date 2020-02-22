@@ -35,7 +35,7 @@
                                 <img src="{{asset('uploads/product_photos')}}/{{App\Product::find($cart_item->product_id)->product_image}}" width="50" alt="">
                                 <div class="pc-title">
                                     <h4>{{App\Product::find($cart_item->product_id)->product_name}}</h4>
-                                    <a href="{{url('delete/form/cart')}}/{{$cart_item->id}}" >Delete product</a>
+
                                 </div>
                             </td>
                             <td class="price-col">${{App\Product::find($cart_item->product_id)->product_price}}</td>
@@ -46,6 +46,10 @@
                                 </div>
                             </td>
                             <td class="total-col">${{(App\Product::find($cart_item->product_id)->product_price) * ($cart_item->product_quantity)}}</td>
+                            <td>
+                                <a href="{{url('delete/form/cart')}}/{{$cart_item->id}}" ><span class="fa fa-2x fa-trash"></span></a>
+                            </td>
+
                         </tr>
                     @empty
                         <tr>
@@ -62,7 +66,9 @@
                 </div>
                 <div class="col-lg-7 col-md-7 text-lg-right text-left">
                     <a href="{{url('clear/cart')}}"><div class="site-btn btn-clear">Clear cart</div></a>
-                    <div class="site-btn btn-line btn-update">Update Cart</div>
+                    <div class="site-btn btn-line btn-update">
+                        Update Cart
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,8 +96,8 @@
                             <h4>Cupon code</h4>
                             <p>Enter your cupone code</p>
                             <div class="cupon-input">
-                                <input type="text">
-                                <button class="site-btn">Apply</button>
+                                <input type="text" id="user_inserted_coupon_name" value="{{$coupon_name}}">
+                                <button class="site-btn" id="apply_coupon_btn">Apply</button>
                             </div>
                         </div>
                     </div>
@@ -101,6 +107,7 @@
                             <p>Final Info</p>
                             <ul class="cart-total-card">
                                 <li>Subtotal<span>$59.90</span></li>
+                                <li>Discount Amount<span>{{$coupon_discount_amounts}} %</span></li>
                                 <li>Shipping<span>Free</span></li>
                                 <li class="total">Total<span>$59.90</span></li>
                             </ul>
@@ -113,4 +120,16 @@
     </div>
     <!-- Page end -->
 
+@endsection
+
+@section('frontend_footer_script')
+    <script>
+        $(document).ready(function () {
+            $('#apply_coupon_btn').click(function () {
+
+                var coupon_name = $('#user_inserted_coupon_name').val();
+                window.location.href = "{{url('/cart')}}"+"/"+coupon_name;
+            })
+        });
+    </script>
 @endsection

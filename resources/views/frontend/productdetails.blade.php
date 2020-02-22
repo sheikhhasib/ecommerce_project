@@ -51,41 +51,15 @@
 							</div>
 						</div>
 						<p>{{ $single_product_info->product_description}}</p>
-						<div class="color-choose">
-							<span>Colors:</span>
-							<div class="cs-item">
-								<input type="radio" name="cs" id="black-color" checked>
-								<label class="cs-black" for="black-color"></label>
-							</div>
-							<div class="cs-item">
-								<input type="radio" name="cs" id="blue-color">
-								<label class="cs-blue" for="blue-color"></label>
-							</div>
-							<div class="cs-item">
-								<input type="radio" name="cs" id="yollow-color">
-								<label class="cs-yollow" for="yollow-color"></label>
-							</div>
-							<div class="cs-item">
-								<input type="radio" name="cs" id="orange-color">
-								<label class="cs-orange" for="orange-color"></label>
-							</div>
-						</div>
-						<div class="size-choose">
-							<span>Size:</span>
-							<div class="sc-item">
-								<input type="radio" name="sc" id="l-size" checked>
-								<label for="l-size">L</label>
-							</div>
-							<div class="sc-item">
-								<input type="radio" name="sc" id="xl-size">
-								<label for="xl-size">XL</label>
-							</div>
-							<div class="sc-item">
-								<input type="radio" name="sc" id="xxl-size">
-								<label for="xxl-size">XXL</label>
-							</div>
-						</div>
-						<a href="{{url('add/to/cart')}}/{{$single_product_info->id}}" class="btn site-btn btn-line">ADD TO CART</a>
+                        @if($single_product_info->product_quantity)
+                            <a href="{{url('add/to/cart')}}/{{$single_product_info->id}}" class="btn site-btn btn-line">ADD TO CART</a>
+                        @else
+                            <div class="alert alert-danger">
+                                Product is not Available
+                            </div>
+                        @endif
+
+
 					</div>
 				</div>
 			</div>

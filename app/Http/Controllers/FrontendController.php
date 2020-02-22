@@ -6,6 +6,7 @@ use App\Mail\ContactMessage;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Cart;
+use App\Coupon;
 use Carbon\Carbon;
 use App\Category;
 use App\Contact;
@@ -71,10 +72,31 @@ class FrontendController extends Controller
         return back();
 
      }
-     function cart()
+     function cart($coupon_name = "")
      {
-        $cart_items = Cart::where('customer_ip', $_SERVER['REMOTE_ADDR'])->get();
-        return view('frontend.cart',compact('cart_items'));
+        if ($coupon_name == ""){
+            $cart_items = Cart::where('customer_ip', $_SERVER['REMOTE_ADDR'])->get();
+            $coupon_discount_amounts = 0;
+            return view('frontend.cart',compact('cart_items','coupon_discount_amounts','coupon_name'));
+
+        }else{
+            if (Coupon::where('coupon_name', $coupon_name)->exists()){
+                if (Carbon::now()->format('Y-m-d') <=Coupon::where('coupon_name', $coupon_name)->first()->valid_till ){
+                    $cart_items = Cart::where('customer_ip', $_SERVER['REMOTE_ADDR'])->get();
+                    $coupon_discount_amounts = Coupon::where('coupon_name', $coupon_name)->first()->discount_amount;
+
+                    return view('frontend.cart',compact('cart_items','coupon_discount_amounts','coupon_name'));
+
+
+
+                }else{
+                    echo "invalid coupon";
+                }
+            }else{
+                echo "coupon nai";
+            }
+        }
+
      }
 
      function deleteformcart($cart_id)
@@ -86,7 +108,4 @@ class FrontendController extends Controller
          Cart::where('customer_ip', $_SERVER['REMOTE_ADDR'])->delete();
          return back();
      }
-
-
-
 }
