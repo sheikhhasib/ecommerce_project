@@ -93,7 +93,7 @@ class FrontendController extends Controller
                     echo "invalid coupon";
                 }
             }else{
-                echo "coupon nai";
+                return back();
             }
         }
 

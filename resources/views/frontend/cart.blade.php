@@ -13,8 +13,6 @@
         </div>
     </div>
     <!-- Page Info end -->
-
-
     <!-- Page -->
     <div class="page-area cart-page spad">
         <div class="container">
@@ -29,6 +27,9 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @php
+                        $sub_total = 0;        
+                    @endphp
                     @forelse($cart_items as $cart_item)
                         <tr>
                             <td class="product-col">
@@ -45,7 +46,12 @@
                                     <input type="number" value="{{$cart_item->product_quantity}}">
                                 </div>
                             </td>
-                            <td class="total-col">${{(App\Product::find($cart_item->product_id)->product_price) * ($cart_item->product_quantity)}}</td>
+                            <td class="total-col">$
+                                {{(App\Product::find($cart_item->product_id)->product_price) * ($cart_item->product_quantity)}}
+                                @php
+                                     $sub_total += ((App\Product::find($cart_item->product_id)->product_price) * ($cart_item->product_quantity));
+                                @endphp
+                            </td>
                             <td>
                                 <a href="{{url('delete/form/cart')}}/{{$cart_item->id}}" ><span class="fa fa-2x fa-trash"></span></a>
                             </td>
@@ -82,15 +88,15 @@
                             <div class="shipping-chooes">
                                 <div class="sc-item">
                                     <input type="radio" name="sc" id="one">
-                                    <label for="one">Next day delivery<span>$4.99</span></label>
+                                    <label for="one" id="label_one">Next day delivery<span>$4.99</span></label>
                                 </div>
                                 <div class="sc-item">
                                     <input type="radio" name="sc" id="two">
-                                    <label for="two">Standard delivery<span>$1.99</span></label>
+                                    <label for="two" id="label_tow">Standard delivery<span>$1.99</span></label>
                                 </div>
                                 <div class="sc-item">
                                     <input type="radio" name="sc" id="three">
-                                    <label for="three">Personal Pickup<span>Free</span></label>
+                                    <label for="three" id="label_three">Personal Pickup<span>Free</span></label>
                                 </div>
                             </div>
                             <h4>Cupon code</h4>
@@ -106,10 +112,10 @@
                             <h4>Cart total</h4>
                             <p>Final Info</p>
                             <ul class="cart-total-card">
-                                <li>Subtotal<span>$59.90</span></li>
+                                <li>Subtotal<span>${{ $sub_total}}</span></li>
                                 <li>Discount Amount<span>{{$coupon_discount_amounts}} %</span></li>
-                                <li>Shipping<span>Free</span></li>
-                                <li class="total">Total<span>$59.90</span></li>
+                                <li>Shipping<span id="shipping_amount">Free</span></li>
+                                <li class="total">Grand Total<span id="grand_total">{{ $sub_total - ($sub_total * ($coupon_discount_amounts/100))}}</span></li>
                             </ul>
                             <a class="site-btn btn-full" href="checkout.html">Proceed to checkout</a>
                         </div>
@@ -118,10 +124,8 @@
             </div>
         </div>
     </div>
-    <!-- Page end -->
-
+    <!-- Page end --> 
 @endsection
-
 @section('frontend_footer_script')
     <script>
         $(document).ready(function () {
@@ -129,7 +133,15 @@
 
                 var coupon_name = $('#user_inserted_coupon_name').val();
                 window.location.href = "{{url('/cart')}}"+"/"+coupon_name;
-            })
+            });
+            $('#label_one').click(function() {
+                var label_one_value = parseFloat(4.99);
+
+                $('#shipping_amount').html(label_one_value);
+                var  grand_total = parseFloat($('#grand_total').html());
+                var final_grand_total = grand_total + label_one_value;
+                $('#grand_total').html(final_grand_total);
+            });
         });
     </script>
 @endsection
