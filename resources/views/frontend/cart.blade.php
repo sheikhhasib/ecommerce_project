@@ -17,67 +17,68 @@
     <div class="page-area cart-page spad">
         <div class="container">
             <div class="cart-table">
-                <table>
-                    <thead>
-                    <tr>
-                        <th class="product-th">Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th class="total-th">Total</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @php
-                        $sub_total = 0;        
-                    @endphp
-                    @forelse($cart_items as $cart_item)
-                        <tr>
-                            <td class="product-col">
-                                <img src="{{asset('uploads/product_photos')}}/{{App\Product::find($cart_item->product_id)->product_image}}" width="50" alt="">
-                                <div class="pc-title">
-                                    <h4>{{App\Product::find($cart_item->product_id)->product_name}}</h4>
+            <form action="{{url('update/cart')}}" method="POST">
+                    @csrf
+                    <table>
+                            <thead>
+                            <tr>
+                                <th class="product-th">Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th class="total-th">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @php
+                                $sub_total = 0;
+                            @endphp
+                            @forelse($cart_items as $cart_item)
+                                <tr>
+                                    <td class="product-col">
+                                        <img src="{{asset('uploads/product_photos')}}/{{App\Product::find($cart_item->product_id)->product_image}}" width="50" alt="">
+                                        <div class="pc-title">
+                                            <h4>{{App\Product::find($cart_item->product_id)->product_name}}</h4>
+                                        </div>
+                                    </td>
+                                    <td class="price-col">${{App\Product::find($cart_item->product_id)->product_price}}</td>
+                                    <td class="quy-col">
+                                        <input type="hidden" name="product_id[]" value="{{$cart_item->product_id}}">
+                                        <div class="quy-input">
+                                            <span>Qty</span>
+                                            <input type="number" name="user_quantity[]" value="{{$cart_item->product_quantity}}">
+                                        </div>
+                                    </td>
+                                    <td class="total-col">$
+                                        {{(App\Product::find($cart_item->product_id)->product_price) * ($cart_item->product_quantity)}}
+                                        @php
+                                            $sub_total += ((App\Product::find($cart_item->product_id)->product_price) * ($cart_item->product_quantity));
+                                        @endphp
+                                    </td>
+                                    <td>
+                                        <a href="{{url('delete/form/cart')}}/{{$cart_item->id}}" ><span class="fa fa-2x fa-trash"></span></a>
+                                    </td>
 
-                                </div>
-                            </td>
-                            <td class="price-col">${{App\Product::find($cart_item->product_id)->product_price}}</td>
-                            <td class="quy-col">
-                                <div class="quy-input">
-                                    <span>Qty</span>
-                                    <input type="number" value="{{$cart_item->product_quantity}}">
-                                </div>
-                            </td>
-                            <td class="total-col">$
-                                {{(App\Product::find($cart_item->product_id)->product_price) * ($cart_item->product_quantity)}}
-                                @php
-                                     $sub_total += ((App\Product::find($cart_item->product_id)->product_price) * ($cart_item->product_quantity));
-                                @endphp
-                            </td>
-                            <td>
-                                <a href="{{url('delete/form/cart')}}/{{$cart_item->id}}" ><span class="fa fa-2x fa-trash"></span></a>
-                            </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td class="text-center">No Data There</td>
+                                </tr>
+                            @endforelse
 
-                        </tr>
-                    @empty
-                        <tr>
-                            <td class="text-center">No Data There</td>
-                        </tr>
-                    @endforelse
-
-                    </tbody>
-                </table>
-            </div>
-            <div class="row cart-buttons">
-                <div class="col-lg-5 col-md-5">
-                    <a href="{{url('/')}}"> <div class="site-btn btn-continue">Continue shooping</div></a>
-                </div>
-                <div class="col-lg-7 col-md-7 text-lg-right text-left">
-                    <a href="{{url('clear/cart')}}"><div class="site-btn btn-clear">Clear cart</div></a>
-                    <div class="site-btn btn-line btn-update">
-                        Update Cart
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row cart-buttons">
+                        <div class="col-lg-5 col-md-5">
+                            <a href="{{url('/')}}"> <div class="site-btn btn-continue">Continue shooping</div></a>
+                        </div>
+                        <div class="col-lg-7 col-md-7 text-lg-right text-left">
+                            <a href="{{url('clear/cart')}}"><div class="site-btn btn-clear">Clear cart</div></a>
+                            <button type="submit" class="site-btn btn-update btn-line">Update Cart</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+    </form>
         <div class="card-warp">
             <div class="container">
                 <div class="row">
@@ -115,7 +116,7 @@
                                 <li>Subtotal<span>${{ $sub_total}}</span></li>
                                 <li>Discount Amount<span>{{$coupon_discount_amounts}} %</span></li>
                                 <li>Shipping<span id="shipping_amount">Free</span></li>
-                                <li class="total">Grand Total<span id="grand_total">{{ $sub_total - ($sub_total * ($coupon_discount_amounts/100))}}</span></li>
+                                <li class="total">Grand Total<span id="grand_total">{{ $sub_total - ($sub_total * ($coupon_discount_amounts/100))}}</span><span>$</span></li>
                             </ul>
                             <a class="site-btn btn-full" href="checkout.html">Proceed to checkout</a>
                         </div>
@@ -124,7 +125,7 @@
             </div>
         </div>
     </div>
-    <!-- Page end --> 
+    <!-- Page end -->
 @endsection
 @section('frontend_footer_script')
     <script>
@@ -136,11 +137,21 @@
             });
             $('#label_one').click(function() {
                 var label_one_value = parseFloat(4.99);
-
                 $('#shipping_amount').html(label_one_value);
                 var  grand_total = parseFloat($('#grand_total').html());
                 var final_grand_total = grand_total + label_one_value;
                 $('#grand_total').html(final_grand_total);
+            });
+            $('#label_tow').click(function() {
+                var label_two_value = parseFloat(1.99);
+                $('#shipping_amount').html(label_two_value);
+                var  grand_total = parseFloat($('#grand_total').html());
+                var final_grand_total = grand_total + label_two_value;
+                $('#grand_total').html(final_grand_total);
+            });
+            $('#label_three').click(function() {
+                var label_three_value = parseFloat(00)
+                $('#shipping_amount').html(label_three_value);
             });
         });
     </script>

@@ -10,7 +10,12 @@ use Image;
 
 class ProductController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('rolechecker');
+    }
+
      function addproductview(){
 
         $products = Product::simplePaginate(6);
@@ -18,12 +23,12 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('product/view',compact('products','deletedproducts','categories'));
      }
-     
-// insert product 
+
+// insert product
      function addproductinsert(Request $request)
      {
 
-         
+
 
         $request->validate([
          'category_id'=> 'required',
@@ -34,14 +39,14 @@ class ProductController extends Controller
          'alert_quantity' => 'required|numeric',
         ]);
         $last_inserted_id = Product::insertGetId([
-            'product_name' => $request->product_name,    
+            'product_name' => $request->product_name,
             'category_id' => $request->category_id,
             'product_description' => $request->product_description,
             'product_price' => $request->product_price,
             'product_quantity' => $request->product_quantity,
             'alert_quantity' => $request->alert_quantity,
       ]);
-        
+
 
       if ($request->hasFile('product_image')) {
          // echo  $last_inserted_id;
@@ -52,7 +57,7 @@ class ProductController extends Controller
             'product_image' => $filename,
          ]);
      }
-     
+
 
       return back()->with('status','Product inserted successfully!');
 
@@ -85,7 +90,7 @@ class ProductController extends Controller
                   'product_image' => $filename,
                ]);
 
-               //photo upload code finish 
+               //photo upload code finish
             }else{
                // delete old photo
                $delete_this_file = Product::find($request->product_id)->product_image;
@@ -102,9 +107,9 @@ class ProductController extends Controller
                //photo upload finish
 
             }
-         }   
-         
-      
+         }
+
+
          Product::find($request->product_id)->update([
             'product_name' => $request->product_name,
             'product_description' => $request->product_description,
@@ -125,11 +130,11 @@ class ProductController extends Controller
      {
       $delete_this_file = Product::onlyTrashed()->find($product_id)->product_image;
       unlink(base_path('public/uploads/product_photos/'.$delete_this_file));
-      
+
       Product::onlyTrashed()->find($product_id)->forceDelete();
       return back();
      }
 
-     
-      
+
+
 }

@@ -11,9 +11,14 @@ use PhpParser\Node\Stmt\If_;
 class CategoryController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('rolechecker');
+    }
 
     function addcategoryview()
-    {   
+    {
         $categories = Category::all();
         return view('category/view',compact('categories'));
     }
@@ -41,8 +46,8 @@ class CategoryController extends Controller
                 'created_at' => Carbon::now(),
             ]);
          }
-       
-        
-        return back()->with('status','Category Added successfully');    
+
+
+        return back()->with('status','Category Added successfully');
     }
 }

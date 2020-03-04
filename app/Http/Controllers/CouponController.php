@@ -8,6 +8,13 @@ use Carbon\Carbon;
 
 class CouponController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('rolechecker');
+    }
+
     function couponaddview(){
         $coupons = Coupon::all();
         return view('coupon/view',compact('coupons'));

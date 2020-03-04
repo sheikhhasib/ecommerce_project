@@ -6,6 +6,7 @@ use App\Mail\ContactMessage;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Cart;
+use App\User;
 use App\Coupon;
 use Carbon\Carbon;
 use App\Category;
@@ -106,6 +107,31 @@ class FrontendController extends Controller
      }
      function clearcart(){
          Cart::where('customer_ip', $_SERVER['REMOTE_ADDR'])->delete();
+         return back();
+     }
+     function updatecart(Request $request){
+        $ip_address = $_SERVER['REMOTE_ADDR'];
+        foreach ($request->product_id as $key_of_product_id => $value_of_product_id) {
+            if( Product::find($value_of_product_id)->product_quantity >= $request->user_quantity[$key_of_product_id])
+            {
+                Cart::where('customer_ip',$ip_address)->where('product_id',$value_of_product_id)->update([
+                    'product_quantity' => $request->user_quantity[$key_of_product_id]
+                ]);
+            }
+        }
+        return back();
+     }
+     public function customerlogin(){
+        return view('customerregister');
+     }
+     public function customerlogininsert(Request $request){
+         User::insert([
+             'name' => $request->name,
+             'email' => $request->email,
+             'password' => bcrypt($request->password),
+             'role' => 2,
+             'created_at' => Carbon::now(),
+         ]);
          return back();
      }
 }

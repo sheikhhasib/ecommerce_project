@@ -1,21 +1,4 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-// use Illuminate\Routing\Route;
-
-
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -33,12 +16,6 @@ Route::post('/add/category/insert','CategoryController@addcategoryinsert');
 Route::get('/contact/message/view','HomeController@contactmessageview');
 Route::get('/change/menu/status/{category_id}','HomeController@changemenustatus');
 
-
-
-
-
-
-
 //frontend controller
 Route::get('contact','FrontendController@contact');
 Route::get('about','FrontendController@about');
@@ -49,10 +26,14 @@ Route::post('/contact/insert','FrontendController@contactinsert');
 Route::get('/add/to/cart/{product_id}','FrontendController@addtocart');
 Route::get('/cart','FrontendController@cart');
 Route::get('/cart/{coupon_name}','FrontendController@cart');
-
 Route::get('/delete/form/cart/{cart_id}','FrontendController@deleteformcart');
 Route::get('/clear/cart','FrontendController@clearcart');
+Route::post('/update/cart','FrontendController@updatecart');
+Route::get('/customer/login','FrontendController@customerlogin');
+Route::post('/customer/login/insert','FrontendController@customerlogininsert');
 
+
+Route::get('/customer/dashboard','CouponController@customerdashboard');
 
 //coupon controller
 Route::get('/coupon/add/view','CouponController@couponaddview');
